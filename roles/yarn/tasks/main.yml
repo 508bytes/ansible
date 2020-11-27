@@ -1,0 +1,14 @@
+---
+ - name: Adding Yarn repository
+    apt_repository:
+      repo: deb https://dl.yarnpkg.com/debian stable main
+      filename: /etc/apt/sources.list.d/yarn.list
+      update_cache: yes
+      state: present
+    become: yes
+ - name: Installing Yarn
+   apt: 
+    name: "yarn"
+    state: latest
+    update_cache: yes
+  become: yes

@@ -1,0 +1,55 @@
+---
+#This playbook runs all the common plays in the deployment
+
+- name: Update all the packages
+  apt: 
+    name: "*"
+    state: latest
+    update_cache: yes
+  become: yes
+
+- name: Installing rben dependencies
+  apt: name={{ item }} state=present 
+  become: yes
+  with_items:
+   - autoconf 
+   - bison 
+   - build-essential 
+   - libssl-dev 
+   - libyaml-dev
+   - libreadline6-dev 
+   - zlib1g-dev 
+   - libncurses5-dev 
+   - libffi-dev 
+   - libgdbm5 
+   - libgdbm-dev
+   - rbenv
+
+#- name: Cloneing and Installing rbenv
+#  git:
+#    repo: 'https://github.com/rbenv/rbenv.git'
+#    dest: ~/.rbenv
+
+#- name: Updating environemnt
+#  become: yes
+#  command: >
+#       pwd
+#       echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+#       echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+#       source ~/.bashrc
+#       type rbenv
+#- name: Symlink
+#  become: yes
+#  file:
+#    src: ~/.rbenv/bin/rbenv
+#    dest: /usr/local/bin/rbenv 
+#    state: link
+
+#- name: Cloneing ruby-build
+#  git:
+#    repo: 'https://github.com/rbenv/ruby-build.git' 
+#    dest: ~/.rbenv/plugins/ruby-build
+
+- name:
+  command: which rbenv
+    

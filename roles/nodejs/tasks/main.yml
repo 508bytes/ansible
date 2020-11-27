@@ -1,0 +1,10 @@
+---
+ - name: Adding Node repo
+   command: >
+       curl -sL https://deb.nodesource.com/setup_12.x
+ 
+ - name: Installing NodeJs
+   apt: 
+      name: nodejs
+      update_cache: yes
+     become: yes
